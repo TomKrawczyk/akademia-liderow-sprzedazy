@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Akademia Liderów Sprzedaży — 4ECO</title>
+<style>
+:root{
+  --navy:#0A0F24; --navy2:#161f42; --green:#1fa971; --green-d:#12704a;
+  --gold:#c9a875; --gold-d:#a8875a;
+  --bg:#f7f5f0; --card:#ffffff; --ink:#1c2230; --muted:#656d7d;
+  --line:#e7e2d8; --soft:#edf6f0; --soft-b:#bfe0cc;
+  --amber:#faf1df; --amber-b:#c98f3a; --sky:#eef2fa; --sky-b:#3c5a94;
+  --d1:rgba(255,255,255,.98); --d2:rgba(255,255,255,.90); --d3:rgba(255,255,255,.68);
+}
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter','Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7}
+a{color:inherit}
+
+/* Layout */
+.wrap{display:flex;min-height:100vh}
+.sidebar{width:310px;background:var(--navy);color:#e6ebf5;position:fixed;top:0;bottom:0;left:0;overflow-y:auto;padding:0 0 40px;z-index:20;transition:transform .25s}
+.sidebar-head{padding:22px 22px 16px;border-bottom:1px solid rgba(255,255,255,.12);position:sticky;top:0;background:var(--navy);z-index:2}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:16px}
+.logo .leaf{width:30px;height:30px;background:var(--green);border-radius:8px 8px 8px 2px;display:flex;align-items:center;justify-content:center;font-size:16px}
+.logo small{display:block;font-weight:400;font-size:11px;color:var(--d3);margin-top:3px;letter-spacing:.02em}
+.nav-part{padding:20px 14px 6px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--d3);font-weight:700}
+.nav a{display:block;padding:9px 22px;color:var(--d2);text-decoration:none;font-size:13.5px;border-left:3px solid transparent;transition:.15s}
+.nav a:hover{background:rgba(255,255,255,.07);color:#fff}
+.nav a.active{background:rgba(31,169,113,.16);border-left-color:var(--green);color:#fff;font-weight:600}
+
+.main{margin-left:310px;flex:1;min-width:0}
+.progress-bar{position:fixed;top:0;left:310px;right:0;height:4px;background:rgba(11,20,55,.08);z-index:30}
+.progress-bar > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--green),var(--green-d));transition:width .2s}
+.content{max-width:860px;margin:0 auto;padding:60px 40px 120px}
+
+/* Hero */
+.hero{background:linear-gradient(150deg,var(--navy),var(--navy2) 75%);color:#fff;border-radius:16px;padding:48px 44px;margin-bottom:36px;box-shadow:0 24px 60px -24px rgba(10,15,36,.55);position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--green))}
+.hero h1{font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:32px;line-height:1.22;margin-bottom:16px;letter-spacing:.2px}
+.hero p{color:var(--d2) !important;font-size:15.5px;font-weight:450;max-width:640px}
+.hero .chips{margin-top:20px;display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);padding:5px 13px;border-radius:20px;font-size:12px;color:var(--d1)}
+.hero .stat-row{margin-top:26px;display:flex;gap:26px;flex-wrap:wrap}
+.hero .stat b{display:block;font-family:'Playfair Display',Georgia,serif;font-size:27px;color:var(--gold)}
+.hero .stat span{font-size:12px;color:var(--d3)}
+
+/* Sections */
+.module{display:none;animation:fade .35s ease}
+.module.show{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.eyebrow{display:inline-block;background:var(--soft);color:var(--green-d);font-weight:700;font-size:11.5px;letter-spacing:.03em;padding:5px 13px;border-radius:20px;margin-bottom:14px;border:1px solid var(--soft-b)}
+.module h2{font-family:'Playfair Display',Georgia,serif;font-weight:700;font-size:27px;color:var(--navy);margin-bottom:9px;line-height:1.28}
+.module .lede{color:var(--muted);font-size:15.5px;margin-bottom:26px}
+.module h3{font-size:18px;color:var(--navy);margin:30px 0 12px;display:flex;align-items:center;gap:9px}
+.module h3::before{content:"";width:5px;height:20px;background:var(--green);border-radius:3px}
+.module h4{font-size:15px;color:var(--navy);margin:20px 0 8px}
+.module p{margin:11px 0;color:#28303f}
+.module ul,.module ol{margin:11px 0 11px 20px}
+.module li{margin:6px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin:18px 0;box-shadow:0 4px 14px -8px rgba(11,20,55,.12)}
+
+/* Special blocks */
+.quote{border-left:4px solid var(--green);background:var(--soft);padding:14px 18px;border-radius:0 10px 10px 0;margin:18px 0;color:#14532d;font-size:14.5px}
+.quote b{color:var(--green-d)}
+.psy{border-left:4px solid var(--sky-b);background:var(--sky);padding:14px 18px;border-radius:0 10px 10px 0;margin:18px 0;font-size:14px}
+.psy b{color:var(--sky-b)}
+.warn{border-left:4px solid var(--amber-b);background:var(--amber);padding:14px 18px;border-radius:0 10px 10px 0;margin:18px 0;font-size:14px;color:#78350f}
+
+/* Dialogue / scenka */
+.scene{background:var(--navy);border-radius:12px;padding:6px 4px;margin:20px 0;overflow:hidden;border:1px solid rgba(255,255,255,.06)}
+.scene-title{color:var(--d3);font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:12px 18px 6px}
+.bubble{margin:8px 16px;padding:10px 14px;border-radius:14px;font-size:14px;max-width:82%;line-height:1.5}
+.bubble.k{background:#1c2a4f;color:var(--d1);border-bottom-left-radius:3px}
+.bubble.c{background:var(--green);color:#04220f;margin-left:auto;border-bottom-right-radius:3px;font-weight:500}
+.bubble .who{display:block;font-size:10.5px;opacity:.7;margin-bottom:2px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.scene .note{color:var(--d3);font-size:12px;font-style:italic;padding:4px 20px 12px}
+
+/* Accordion */
+.acc{border:1px solid var(--line);border-radius:12px;margin:10px 0;overflow:hidden;background:var(--card)}
+.acc-h{padding:14px 18px;cursor:pointer;font-weight:600;color:var(--navy);display:flex;justify-content:space-between;align-items:center;font-size:14.5px;user-select:none}
+.acc-h:hover{background:#f8fafc}
+.acc-h .ico{color:var(--green);transition:transform .2s;font-size:18px}
+.acc.open .acc-h .ico{transform:rotate(45deg)}
+.acc-b{max-height:0;overflow:hidden;transition:max-height .3s ease;padding:0 18px}
+.acc.open .acc-b{max-height:1400px;padding:0 18px 16px}
+
+/* table */
+.tbl{width:100%;border-collapse:collapse;margin:16px 0;font-size:13.5px;overflow:hidden;border-radius:10px}
+.tbl th{background:var(--navy);color:var(--d1);padding:10px 12px;text-align:left}
+.tbl td{border:1px solid var(--line);padding:9px 12px;vertical-align:top}
+.tbl tr:nth-child(even) td{background:#f8fafc}
+
+/* callout tiles */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:18px 0}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.tile .big{font-size:22px;font-weight:700;color:var(--green-d)}
+.tile .lbl{font-size:12.5px;color:var(--muted);margin-top:3px}
+
+/* footer nav */
+.pager{display:flex;justify-content:space-between;gap:12px;margin-top:44px;padding-top:24px;border-top:1px solid var(--line)}
+.btn{background:var(--navy);color:#fff;border:none;padding:12px 20px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:.15s}
+.btn:hover{background:var(--navy2)}
+.btn.ghost{background:#fff;color:var(--navy);border:1px solid var(--line)}
+.btn.ghost:hover{background:#f8fafc}
+.btn:disabled{opacity:.35;cursor:default}
+
+/* quiz */
+.quiz{background:var(--card);border:2px dashed var(--soft-b);border-radius:14px;padding:20px 22px;margin:22px 0}
+.quiz .q{font-weight:600;color:var(--navy);margin-bottom:12px}
+.opt{display:block;width:100%;text-align:left;background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:11px 14px;margin:7px 0;cursor:pointer;font-size:14px;transition:.15s}
+.opt:hover{border-color:var(--green)}
+.opt.right{background:var(--soft);border-color:var(--green);color:#14532d;font-weight:600}
+.opt.wrong{background:#fef2f2;border-color:#fca5a5;color:#991b1b}
+.quiz .fb{margin-top:10px;font-size:13.5px;padding:10px 14px;border-radius:8px;display:none}
+.quiz .fb.show{display:block}
+
+/* Hero decorative art */
+.hero-art{position:absolute;top:-30px;right:-30px;width:320px;height:320px;object-fit:cover;opacity:.4;pointer-events:none;-webkit-mask-image:linear-gradient(120deg,transparent 8%,#000 58%);mask-image:linear-gradient(120deg,transparent 8%,#000 58%)}
+@media(max-width:900px){.hero-art{display:none}}
+
+/* Part banner - duze kwadratowe grafiki bez przycinania, layout w rzedzie */
+.part-banner{display:flex;align-items:center;gap:28px;border-radius:22px;overflow:hidden;margin-bottom:30px;position:relative;box-shadow:0 18px 40px -18px rgba(11,20,55,.32);background:linear-gradient(120deg,var(--navy),var(--navy2) 85%);padding:22px 30px 22px 22px}
+.part-banner img{width:230px;height:230px;object-fit:cover;display:block;border-radius:18px;flex-shrink:0;background:#f7f5f0}
+.part-banner .pb-sub{color:var(--d3);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+.part-banner .pb-label{color:#fff;font-size:26px;font-weight:700;font-family:'Playfair Display',Georgia,serif;line-height:1.3}
+@media(max-width:560px){.part-banner{flex-direction:column;align-items:flex-start;padding:18px}.part-banner img{width:160px;height:160px}.part-banner .pb-label{font-size:20px}}
+
+/* Module banner - moduly z wlasna ikonka dostaja ta sama karte co czesci kursu */
+.mod-icon{display:none}
+
+/* Scroll reveal */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* Bubble entrance */
+.bubble{opacity:0;transform:translateY(8px);transition:opacity .4s ease,transform .4s ease}
+.bubble.visible{opacity:1;transform:none}
+
+/* Hover lift */
+.chip,.tile,.card{transition:transform .2s ease,box-shadow .2s ease}
+.chip:hover{transform:translateY(-2px);background:rgba(255,255,255,.14)}
+.tile:hover,.card:hover{transform:translateY(-3px);box-shadow:0 14px 30px -16px rgba(11,20,55,.22)}
+.nav a:hover{transform:translateX(2px)}
+.nav a{transform:translateX(0);transition:.18s ease}
+
+/* Quiz feedback animations */
+@keyframes shake{10%,90%{transform:translateX(-1px)}20%,80%{transform:translateX(2px)}30%,50%,70%{transform:translateX(-4px)}40%,60%{transform:translateX(4px)}}
+.opt.wrong{animation:shake .5s}
+@keyframes popIn{0%{transform:scale(.94)}60%{transform:scale(1.03)}100%{transform:scale(1)}}
+.opt.right{animation:popIn .35s ease}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.quiz .fb.show{animation:fadeSlide .35s ease}
+
+/* accordion icon micro-bounce */
+.acc-h:active .ico{transform:scale(.85)}
+
+/* mobile */
+.menu-btn{display:none;position:fixed;top:12px;left:12px;z-index:40;background:var(--navy);color:#fff;border:none;width:44px;height:44px;border-radius:10px;font-size:20px;cursor:pointer}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:15}
+@media(max-width:900px){
+  .sidebar{transform:translateX(-100%)}
+  .sidebar.open{transform:none}
+  .main{margin-left:0}
+  .progress-bar{left:0}
+  .menu-btn{display:block}
+  .overlay.show{display:block}
+  .content{padding:70px 20px 100px}
+  .hero{padding:30px 22px}
+  .hero h1{font-size:23px}
+}
+</style>
+</head>
+<body>
+<button class="menu-btn" onclick="toggleMenu()">☰</button>
+<div class="overlay" id="ov" onclick="toggleMenu()"></div>
+<div class="progress-bar"><i id="prog"></i></div>
+
+<div class="wrap">
+  <aside class="sidebar" id="sb">
+    <div class="sidebar-head">
+      <div class="logo">
+        <span class="leaf">🌿</span>
+        <span>Akademia Sprzedaży<small>Bezpośrednia · 4ECO Green Energy</small></span>
+      </div>
+    </div>
+    <nav class="nav" id="nav"></nav>
+  </aside>
+
+  <main class="main">
+    <div class="content" id="content"></div>
+  </main>
+</div>
+
+<script>
+/* ---------- DANE KURSU ---------- */
+const COURSE = [
+  {id:"intro", part:"Start", nav:"Wprowadzenie", hero:true},
+  // CZĘŚĆ I
+  {id:"rola_managera", part:"I · Fundamenty przywództwa", nav:"1. Manager to nie najlepszy sprzedawca"},
+  {id:"sinek", part:"I · Fundamenty przywództwa", nav:"2. Sinek — przywództwo służebne i sens"},
+  {id:"goleman", part:"I · Fundamenty przywództwa", nav:"3. Goleman — inteligencja emocjonalna"},
+  {id:"odprawa_poranna", part:"I · Fundamenty przywództwa", nav:"4. Odprawa poranna zespołu"},
+  // CZĘŚĆ II
+  {id:"deci_ryan", part:"II · Motywowanie i coaching handlowców", nav:"5. Deci i Ryan — motywacja wewnętrzna"},
+  {id:"whitmore_grow", part:"II · Motywowanie i coaching handlowców", nav:"6. Whitmore — model coachingowy GROW"},
+  {id:"kim_scott", part:"II · Motywowanie i coaching handlowców", nav:"7. Kim Scott — szczery feedback z troską"},
+  {id:"slabe_wyniki", part:"II · Motywowanie i coaching handlowców", nav:"8. Radzenie sobie ze słabymi wynikami"},
+  // CZĘŚĆ III
+  {id:"rekrutacja", part:"III · Budowanie zespołu", nav:"9. Rekrutacja dobrego handlowca"},
+  {id:"onboarding_30", part:"III · Budowanie zespołu", nav:"10. Pierwsze 30 dni nowego sprzedawcy"},
+  {id:"edmondson", part:"III · Budowanie zespołu", nav:"11. Edmondson — bezpieczeństwo psychologiczne"},
+  {id:"lencioni", part:"III · Budowanie zespołu", nav:"12. Lencioni — pięć dysfunkcji zespołu"},
+  // CZĘŚĆ IV
+  {id:"blanchard", part:"IV · Przywództwo w praktyce", nav:"13. Blanchard — przywództwo sytuacyjne"},
+  {id:"trudne_rozmowy", part:"IV · Przywództwo w praktyce", nav:"14. Trudne rozmowy wprost i z szacunkiem"},
+  {id:"kryzys", part:"IV · Przywództwo w praktyce", nav:"15. Zarządzanie kryzysem — słaby miesiąc"},
+  {id:"system_lidera", part:"IV · Przywództwo w praktyce", nav:"16. System pracy lidera i własny rozwój"}
+];
+
+/* Treść modułów wstrzykiwana z osobnego obiektu (patrz plik) */
+</script>
+<script src="tresc_01_fundamenty_przywodztwa.js"></script>
+<script src="tresc_02_motywowanie_coaching.js"></script>
+<script src="tresc_03_budowanie_zespolu.js"></script>
+<script src="tresc_04_przywodztwo_praktyka.js"></script>
+<script>
+/* ---------- RENDER ---------- */
+const content = document.getElementById('content');
+const nav = document.getElementById('nav');
+let current = 0;
+
+// zbuduj menu z podziałem na części
+let lastPart = null;
+COURSE.forEach((m,i)=>{
+  if(m.part!==lastPart){
+    const p=document.createElement('div');p.className='nav-part';p.textContent=m.part;nav.appendChild(p);lastPart=m.part;
+  }
+  const a=document.createElement('a');a.href='#'+m.id;a.textContent=m.nav;a.dataset.i=i;
+  a.onclick=e=>{e.preventDefault();go(i);if(window.innerWidth<=900)toggleMenu();};
+  nav.appendChild(a);
+});
+
+// obrazki banerowe dla kazdej z 5 czesci kursu
+const PART_IMG = {
+  "I · Fundamenty przywództwa": "https://media.base44.com/images/public/69cd0d788375531a373c98b1/060aedd9c_generated_image.png",
+  "II · Motywowanie i coaching handlowców": "https://media.base44.com/images/public/69cd0d788375531a373c98b1/7d50a5503_generated_image.png",
+  "III · Budowanie zespołu": "https://media.base44.com/images/public/69cd0d788375531a373c98b1/ca40d7eeb_generated_image.png",
+  "IV · Przywództwo w praktyce": "https://media.base44.com/images/public/69cd0d788375531a373c98b1/3a43479a8_generated_image.png"
+};
+
+// wyrenderuj wszystkie moduły
+let lastPartBanner = null;
+content.innerHTML = COURSE.map((m,i)=>{
+  const body = (typeof CONTENT!=='undefined' && CONTENT[m.id]) ? CONTENT[m.id] : '<p>—</p>';
+  const prev = i>0 ? `<button class="btn ghost" onclick="go(${i-1})">← ${COURSE[i-1].nav}</button>` : '<span></span>';
+  const next = i<COURSE.length-1 ? `<button class="btn" onclick="go(${i+1})">${COURSE[i+1].nav} →</button>` : '<span></span>';
+  let banner = '';
+  if(m.part !== lastPartBanner && PART_IMG[m.part]){
+    const parts = m.part.split(' · ');
+    const roman = parts[0] || '';
+    const label = parts[1] || m.part;
+    banner = `<div class="part-banner reveal"><img src="${PART_IMG[m.part]}" alt="${m.part}" loading="lazy"><div><div class="pb-sub">Część ${roman}</div><div class="pb-label">${label}</div></div></div>`;
+    lastPartBanner = m.part;
+  }
+  return `<section class="module" id="${m.id}">${banner}${body}<div class="pager">${prev}${next}</div></section>`;
+}).join('');
+
+// Zamien pojedyncze ikonki modulowe (mod-icon) na taka sama karte jak part-banner (spojny styl)
+content.querySelectorAll('.mod-icon').forEach(img=>{
+  const eyebrow = img.nextElementSibling;
+  if(!eyebrow || !eyebrow.classList || !eyebrow.classList.contains('eyebrow')) return;
+  const h2 = eyebrow.nextElementSibling;
+  if(!h2 || h2.tagName !== 'H2') return;
+  const wrap = document.createElement('div');
+  wrap.className = 'part-banner mod-banner reveal';
+  const imgClone = document.createElement('img');
+  imgClone.src = img.getAttribute('src');
+  imgClone.alt = '';
+  imgClone.loading = 'lazy';
+  const textWrap = document.createElement('div');
+  const sub = document.createElement('div'); sub.className='pb-sub'; sub.textContent = eyebrow.textContent;
+  const label = document.createElement('div'); label.className='pb-label'; label.textContent = h2.textContent;
+  textWrap.appendChild(sub); textWrap.appendChild(label);
+  wrap.appendChild(imgClone); wrap.appendChild(textWrap);
+  img.replaceWith(wrap);
+  eyebrow.remove();
+  h2.remove();
+});
+
+// --- animacje: scroll reveal ---
+const revealTargets = content.querySelectorAll('h2,h3,.lede,.tile,.quiz,.scene,.card,.tbl,.quote,.psy,.warn,.part-banner,.mod-icon');
+revealTargets.forEach(el=>el.classList.add('reveal'));
+const bubbleTargets = content.querySelectorAll('.bubble');
+bubbleTargets.forEach(el=>{
+  const scene = el.closest('.scene');
+  const within = scene ? Array.from(scene.querySelectorAll('.bubble')).indexOf(el) : 0;
+  el.style.transitionDelay = (within*0.09)+'s';
+});
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+  });
+},{threshold:.15});
+revealTargets.forEach(el=>io.observe(el));
+bubbleTargets.forEach(el=>io.observe(el));
+
+// --- animacja: licznik statystyk w hero ---
+function animateStats(){
+  document.querySelectorAll('.hero .stat b').forEach(el=>{
+    const raw = el.dataset.target || el.textContent.trim();
+    el.dataset.target = raw;
+    const suffix = raw.replace(/[0-9]/g,'');
+    const target = parseInt(raw,10);
+    if(isNaN(target)) return;
+    let cur=0;
+    const step = Math.max(1,Math.ceil(target/22));
+    el.textContent='0'+suffix;
+    const t=setInterval(()=>{
+      cur+=step;
+      if(cur>=target){cur=target;clearInterval(t);}
+      el.textContent=cur+suffix;
+    },30);
+  });
+}
+animateStats();
+
+function go(i){
+  current=i;
+  document.querySelectorAll('.module').forEach(el=>el.classList.remove('show'));
+  document.getElementById(COURSE[i].id).classList.add('show');
+  document.querySelectorAll('.nav a').forEach(a=>a.classList.toggle('active',+a.dataset.i===i));
+  document.getElementById('prog').style.width = ((i)/(COURSE.length-1)*100)+'%';
+  window.scrollTo({top:0,behavior:'smooth'});
+  localStorage.setItem('akad_pos',i);
+  if(COURSE[i].id==='intro') animateStats();
+}
+function toggleMenu(){document.getElementById('sb').classList.toggle('open');document.getElementById('ov').classList.toggle('show');}
+function toggleAcc(el){el.parentElement.classList.toggle('open');}
+function quizPick(btn,ok,fbRight,fbWrong){
+  const box=btn.closest('.quiz');
+  box.querySelectorAll('.opt').forEach(o=>o.disabled=true);
+  btn.classList.add(ok?'right':'wrong');
+  const fb=box.querySelector('.fb');fb.classList.add('show');
+  fb.style.background=ok?'#f0fdf4':'#fef2f2';fb.style.color=ok?'#14532d':'#991b1b';
+  fb.innerHTML=ok?('✓ '+fbRight):('✗ '+fbWrong);
+  if(!ok){box.querySelectorAll('.opt').forEach(o=>{if(o.dataset.ok==='1')o.classList.add('right');});}
+  if(navigator.vibrate) navigator.vibrate(ok?15:[20,30,20]);
+}
+// start na zapisanej pozycji
+go(parseInt(localStorage.getItem('akad_pos')||'0'));
+</script>
+</body>
+</html>
