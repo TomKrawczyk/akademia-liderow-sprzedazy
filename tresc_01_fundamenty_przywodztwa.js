@@ -5,7 +5,7 @@ CONTENT.intro = `
 <div class="hero">
   <img class="hero-art" src="https://media.base44.com/images/public/69cd0d788375531a373c98b1/1c27f9063_generated_image.png" alt="" loading="lazy">
   <span class="eyebrow" style="background:rgba(34,197,94,.18);color:#bbf7d0;border-color:rgba(34,197,94,.3)">Wersja interaktywna</span>
-  <h1>Akademia Liderów Sprzedaży 4ECO</h1>
+  <h1>Akademia Liderów Sprzedaży</h1>
   <p>Kompletny, interaktywny program dla managerów i liderów zespołów sprzedażowych. Awans na managera to zmiana zawodu, nie nagroda za bycie najlepszym sprzedawcą — ten kurs uczy fundamentów przywództwa, motywowania i coachingu ludzi, budowania zespołu przez rekrutację i onboarding, oraz codziennej praktyki lidera w trudnych momentach.</p>
   <div class="stat-row">
     <div class="stat"><b>16</b><span>modułów</span></div>
